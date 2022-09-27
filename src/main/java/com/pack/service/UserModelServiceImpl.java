@@ -20,7 +20,9 @@ public class UserModelServiceImpl implements UserModelService{
 		
 		Optional<UserModel> userModel = userModelRepository.findByUserNameAndPassword(userName, password);
 		
-		if(userModel.isPresent())
+		
+		
+		if(!userModel.isPresent())
 		{
 			throw new UsernameNotFoundException("no user data found");
 		}
@@ -31,7 +33,7 @@ public class UserModelServiceImpl implements UserModelService{
 	@Override
 	public UserModel getUserData(String userName) {
 		Optional<UserModel> userModel = userModelRepository.findByUserName(userName);
-		if(userModel.isPresent()) {
+		if(!userModel.isPresent()) {
 			throw new UsernameNotFoundException("no user data found!");
 		}
 		return userModel.get();
