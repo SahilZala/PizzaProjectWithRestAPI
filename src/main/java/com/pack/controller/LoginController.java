@@ -25,7 +25,7 @@ import com.pack.util.PathsClass;
 public class LoginController {
 	
 	@Autowired
-	public AuthenticationManager authenticationManger;
+	public AuthenticationManager authenticationManger;	
 	
 	@Autowired
 	public UserDetailsService userDetailsService; 
@@ -34,7 +34,7 @@ public class LoginController {
 	public JWTUtil jwtUtil;
 	
 	@PostMapping(value = PathsClass.LOGIN_PATH)
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	public ResponseEntity<StatusModel> generateToken(@RequestBody JWTRequest jwtRequest){
 		try {
 			authenticationManger.authenticate(new UsernamePasswordAuthenticationToken(
