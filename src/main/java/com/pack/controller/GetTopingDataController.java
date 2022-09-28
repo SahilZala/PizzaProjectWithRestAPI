@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ public class GetTopingDataController {
 	TopingModelService topingModelService;
 	
 	@GetMapping(PathsClass.GET_TOPING_DATA_PATH)
+	@CrossOrigin(origins = "*")
 	public ResponseEntity<StatusModel> getTopingDataController(){
 		try{
 			return new ResponseEntity<>(new StatusModel(LocalDateTime.now().toString(),HttpStatus.OK,
