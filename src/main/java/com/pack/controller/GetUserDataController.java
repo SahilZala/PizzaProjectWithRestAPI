@@ -25,7 +25,7 @@ public class GetUserDataController {
 	UserModelService userModelService;
 	
 	@GetMapping(PathsClass.GET_USER_DATA_PATH)
-	@CrossOrigin(origins = "*")
+	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<StatusModel> getUserData(){
 		UserDetails ud = UserCredentials.getUserDetails();
 		UserModel userModel = null;
