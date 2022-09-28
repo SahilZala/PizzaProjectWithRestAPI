@@ -1,6 +1,7 @@
 package com.pack.controller;
 
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,22 +18,27 @@ import com.pack.service.UserModelService;
 import com.pack.util.PathsClass;
 import com.pack.util.UserCredentials;
 
+
 @RestController
 @RequestMapping(PathsClass.CUSTOMER_PATH)
 public class GetUserDataController {
+	
+	static Logger logger = Logger.getLogger(GetUserDataController.class.getName());  
 	
 	@Autowired
 	UserModelService userModelService;
 	
 	@GetMapping(PathsClass.GET_USER_DATA_PATH)
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	public ResponseEntity<StatusModel> getUserData(){
 		UserDetails ud = UserCredentials.getUserDetails();
 		UserModel userModel = null;
 		try {
 			userModel = userModelService.getUserData(ud.getUsername(), ud.getPassword());
+			logger.info(userModel.toString());
 		}
 		catch(UsernameNotFoundException ex) {
+			logger.warning(ex.getMessage());
 			return new ResponseEntity<>(
 					new StatusModel(
 							LocalDateTime.now().toString(),HttpStatus.FORBIDDEN,
