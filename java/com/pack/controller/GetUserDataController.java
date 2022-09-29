@@ -20,6 +20,7 @@ import com.pack.util.UserCredentials;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping(PathsClass.CUSTOMER_PATH)
 public class GetUserDataController {
 	
@@ -29,13 +30,13 @@ public class GetUserDataController {
 	UserModelService userModelService;
 	
 	@GetMapping(PathsClass.GET_USER_DATA_PATH)
-	@CrossOrigin(origins = "*")
 	public ResponseEntity<StatusModel> getUserData(){
+		logger.info("in getuserData controller.");
 		UserDetails ud = UserCredentials.getUserDetails();
 		UserModel userModel = null;
 		try {
 			userModel = userModelService.getUserData(ud.getUsername(), ud.getPassword());
-			logger.info(userModel.toString());
+			
 		}
 		catch(UsernameNotFoundException ex) {
 			logger.warning(ex.getMessage());

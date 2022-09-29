@@ -22,6 +22,7 @@ import com.pack.util.JWTUtil;
 import com.pack.util.PathsClass;
 
 @RestController
+@CrossOrigin
 public class LoginController {
 	
 	@Autowired
@@ -34,7 +35,6 @@ public class LoginController {
 	public JWTUtil jwtUtil;
 	
 	@PostMapping(value = PathsClass.LOGIN_PATH)
-	@CrossOrigin(origins = "*")
 	public ResponseEntity<StatusModel> generateToken(@RequestBody JWTRequest jwtRequest){
 		try {
 			authenticationManger.authenticate(new UsernamePasswordAuthenticationToken(
